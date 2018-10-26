@@ -10,7 +10,7 @@ class App extends Component {
         <header className="App-header">
         </header>
         <main className="App-main">
-          <Sidebar types={this.props.types}></Sidebar>
+          <Sidebar></Sidebar>
         </main>
       </div>
     );
