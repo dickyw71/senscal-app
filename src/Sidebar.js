@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListItem from './List-Item.js';
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -40,15 +41,13 @@ class Sidebar extends Component {
             typelist = this.state.items.map((type) => {
                 let href = `/api/types/${type.sensor_type_cd}/sensors/?nh_sens_id=null`
                 return (
-                <a href={href} className="_list-item" key={type.sensor_type_cd}>
-                    <span>{type.sensor_type_cd}  {type.sensor_type_sdesc}</span>
-                </a>
+                    <ListItem href={href} type={type}></ListItem>
                 )
             })
         }
 
         return (
-            <div className="_list" role="navigation">
+            <div className=" _list" role="navigation">
                 {typelist}
             </div>
         );
