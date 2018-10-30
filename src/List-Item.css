@@ -1,0 +1,8 @@
+._list-text {
+    display: block;
+    pointer-events: none;
+}
+
+._list-dir:not(._list-rdir), ._list-disabled {
+    padding-left: 2.125rem;
+}
