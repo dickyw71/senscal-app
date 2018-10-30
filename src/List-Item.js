@@ -11,24 +11,27 @@ class ListItem extends Component {
         this.onItemOpen = this.onItemOpen.bind(this);
     }
 
-    onItemOpen() {
+    onItemOpen(type_code) {
         this.setState((prevState) => {
             return {
                 isOpen: prevState.isOpen ? false : true
             }
         })
+        
     }
     
 
     render () {
+        const type_code = this.props.type.sensor_type_cd
+
         return (
             <a 
             href="#" 
             className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
-            key={this.props.type.sensor_type_cd}
+            key={type_code}
             onClick={(e) => { 
                 e.preventDefault() 
-                this.onItemOpen()
+                this.onItemOpen(type_code)
             }}
             >
             <svg className="_list-arrow">
