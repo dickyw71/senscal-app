@@ -4,11 +4,33 @@ import './List-Item.css';
 class ListItem extends Component {
     constructor(props) {
         super(props)
+        this.state ={
+            isOpen: false
+        }
+
+        this.onItemOpen = this.onItemOpen.bind(this);
     }
+
+    onItemOpen() {
+        this.setState((prevState) => {
+            return {
+                isOpen: prevState.isOpen ? false : true
+            }
+        })
+    }
+    
 
     render () {
         return (
-            <a href={null} className="_list-item _list-dir" key={this.props.type.sensor_type_cd}>
+            <a 
+            href="#" 
+            className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
+            key={this.props.type.sensor_type_cd}
+            onClick={(e) => { 
+                e.preventDefault() 
+                this.onItemOpen()
+            }}
+            >
             <svg className="_list-arrow">
                 <use href="#icon-dir"></use>
             </svg>
