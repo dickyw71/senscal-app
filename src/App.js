@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Sidebar from './Sidebar';
+import SensorTypeList from './SensorTypeList';
 import './App.css';
 
 
@@ -10,7 +10,7 @@ class App extends Component {
         <header className="_header" role="banner">
         </header>
         <section className="_sidebar" tabIndex="-1">
-          <Sidebar></Sidebar>
+          <SensorTypeList></SensorTypeList>
         </section>
         <div className="_container" role="document">
           <main className="_content _content_loading" role="main"></main>
