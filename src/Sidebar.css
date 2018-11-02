@@ -121,4 +121,14 @@
     left: 1rem;
     padding: .4375rem; 
 }
+
+._list-count {
+  color: var(--textColorLighter);
+  pointer-events: none;
+}
+._list-count, ._list-enable {
+  float: right;
+  font-size: .75rem;
+  margin-left: .375rem;
+}
   
