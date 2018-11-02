@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SensorTypeItem from './SensorTypeItem.js';
 import SensorList from './SensorList.js';
 import './Sidebar.css';
+import PartList from './PartList.js';
 
 class SensorTypeList extends Component {
     constructor(props) {
@@ -42,6 +43,7 @@ class SensorTypeList extends Component {
                                 code: item.sensor_type_cd,
                                 desc: item.sensor_type_sdesc,
                                 sensorType: item,
+                                partsUri: `/api/types/${item.sensor_type_cd}/parts/`,
                                 sensorsUri: `/api/types/${item.sensor_type_cd}/sensors/?nh_sens_id=null`,
                                 isOpen: false
                             }
@@ -72,6 +74,7 @@ class SensorTypeList extends Component {
                 let elements = []
                 elements.push(<SensorTypeItem key={item.code} item={item} onItemClicked={this.handleItemClicked}></SensorTypeItem>)
                 if(item.isOpen) {
+                    elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
                     elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
                 }
  
@@ -80,7 +83,7 @@ class SensorTypeList extends Component {
         }
 
         return (
-            <div className=" _list" role="navigation">
+            <div className="_list" role="navigation">
                 {typelist}
             </div>
         );
