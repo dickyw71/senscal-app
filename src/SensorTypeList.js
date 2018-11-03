@@ -36,7 +36,6 @@ class SensorTypeList extends Component {
             .then(
                 (result) => {
                     this.setState({
-                        isLoaded: true,
                         items: result.map((item) => { 
                             return {
                                 code: item.sensor_type_cd,
@@ -46,7 +45,8 @@ class SensorTypeList extends Component {
                                 sensorsUri: `/api/types/${item.sensor_type_cd}/sensors/?nh_sens_id=null`,
                                 isOpen: false
                             }
-                        })
+                        }),
+                        isLoaded: true
                     })
                 },
                 (error) => {
@@ -65,7 +65,6 @@ class SensorTypeList extends Component {
             typelist = <p>Failed to load Sensor Types with error {this.state.error}</p>
         }
         else if (this.state.items.length === 0) {
-            // typelist = <p>Loading please wait...</p>
             typelist = null
         }
         else {
