@@ -8,7 +8,7 @@ class PartList extends Component {
             error: null,
             items: [],
             isOpen: false,
-            count: "..."
+            count: 0
         }
 
         this.itemClicked = this.itemClicked.bind(this)
@@ -45,11 +45,13 @@ class PartList extends Component {
     }   
 
     render() {
+        const _listArrow = this.state.count===0 ? null : <svg className="_list-arrow"><use href="#icon-dir"></use></svg>
+        const _className = this.state.count===0 ? "_list-item" :  this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"
         return (        
             <div className=" _list _list-sub" role="navigation">
                 <a 
                     href={this.props.uri} 
-                    className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
+                    className={_className} 
                     key={this.props.uri} 
                     onClick={(e) => { 
                         e.preventDefault() 
@@ -57,9 +59,7 @@ class PartList extends Component {
                     }}
                     tabIndex="-1"
                     >
-                    <svg className="_list-arrow">
-                        <use href="#icon-dir"></use>
-                    </svg>
+                    {_listArrow}
                     <span className="_list-count">{this.state.count}</span> 
                     <span className="_list-text">Parts</span>             
                 </a>
