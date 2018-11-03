@@ -73,8 +73,8 @@ class SensorTypeList extends Component {
                 let elements = []
                 elements.push(<SensorTypeItem key={item.code} item={item} onItemClicked={this.handleItemClicked}></SensorTypeItem>)
                 if(item.isOpen) {
-                    elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
-                    // elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
+                    // elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
+                    elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
                 }
  
                 return elements
