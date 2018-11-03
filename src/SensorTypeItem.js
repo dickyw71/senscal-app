@@ -15,7 +15,6 @@ class SensorTypeItem extends Component {
     render () {
         return (
             <a 
-                href="#" 
                 className={this.props.item.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
                 key={this.props.item.code}
                 onClick={(e) => { 
