@@ -17,7 +17,6 @@ class SensorTypeList extends Component {
     }
 
     handleItemClicked(code) {
-        console.log(code)
         let _items = this.state.items.map((item) => {
             if (item.code === code) {
                 item.isOpen = item.isOpen ? false : true
@@ -66,7 +65,8 @@ class SensorTypeList extends Component {
             typelist = <p>Failed to load Sensor Types with error {this.state.error}</p>
         }
         else if (this.state.items.length === 0) {
-            typelist = <p>Loading please wait...</p>
+            // typelist = <p>Loading please wait...</p>
+            typelist = null
         }
         else {
             typelist = this.state.items.map((item) => {
@@ -75,7 +75,7 @@ class SensorTypeList extends Component {
                 elements.push(<SensorTypeItem key={item.code} item={item} onItemClicked={this.handleItemClicked}></SensorTypeItem>)
                 if(item.isOpen) {
                     elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
-                    elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
+                    // elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
                 }
  
                 return elements
