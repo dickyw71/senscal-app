@@ -6,8 +6,19 @@ class SensorList extends Component {
         super(props)
         this.state = {
             error: null,
-            items: []
+            items: [],
+            isOpen: false,
+            count: 0
         }
+        this.itemClicked = this.itemClicked.bind(this)
+    }
+
+    itemClicked() {
+        this.setState((prevState) => {
+            return {
+               isOpen: prevState.isOpen ? false : true
+            }
+        })
     }
 
     componentDidMount() {
@@ -16,7 +27,6 @@ class SensorList extends Component {
             .then(
                 (result) => {
                     this.setState({
-                        isLoaded: true,
                         items: result.map((item) => { 
                             return {
                                 barcode: item.BARCODE,
@@ -25,7 +35,9 @@ class SensorList extends Component {
                                 calibrationsUri: `/api/sensors/${item.SENSOR_ID}/calibrations/`,
                                 isOpen: false
                             }
-                        })
+                        }),
+                        isLoaded: true,
+                        count: result.length
                     })
                 },
                 (error) => {
@@ -38,26 +50,48 @@ class SensorList extends Component {
     }
 
     render() {
-        let sensorList = undefined;
 
-        if (this.state.error) {
-            sensorList = <p>Failed to load Sensors with error {this.state.error}</p>
-        }
-        else if (this.state.items.length === 0) {
-            sensorList = <p>Loading please wait...</p>
-        }
-        else {
-            console.log(this.state.items[0])
-            sensorList = this.state.items.map((item) => {
-                let sensorListItem = <SensorItem key={item.barcode} item={item} onItemClicked={this.handleItemClicked}></SensorItem> 
-  
-                return sensorListItem;
-            })
+        let _listArrow = null  
+        let _onClick = null
+        let _sensorList = null
+        let _href = null
+        let _className = "_list-item" 
+
+        if (this.state.count > 0) {
+
+            _listArrow = <svg className="_list-arrow"><use href="#icon-dir"></use></svg>
+            _className = this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"
+            _onClick = (e) => { e.preventDefault(); this.itemClicked(this.props.uri) }
+            _href = this.props.uri
         }
 
+
+        if (this.state.isOpen) {
+            _sensorList = (
+                <div className="_list _list-sub" role="navigation">
+                    {this.state.items.map((item, index) => { 
+                        if (index < 20 ) {
+                            return <SensorItem key={item.barcode} uri={item.calibrationsUri} item={item}></SensorItem>
+                        }
+                    })}
+                </div>
+            )
+        }
+        
         return (
             <div className=" _list _list-sub" role="navigation">
-                {sensorList}
+                <a 
+                    href={_href} 
+                    className={_className} 
+                    key={this.props.uri} 
+                    onClick={_onClick}
+                    tabIndex="-1"
+                    >
+                    {_listArrow}
+                    <span className="_list-count">{this.state.count}</span> 
+                    <span className="_list-text">Sensors</span>             
+                </a>
+                {_sensorList}
             </div>
         );
     }

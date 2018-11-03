@@ -4,23 +4,26 @@ import './List-Item.css';
 class SensorItem extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isOpen: false
+        }
  
         this.itemClicked = this.itemClicked.bind(this);
     }
 
     itemClicked(code) {
-        this.props.onItemClicked(code)
+       
     }
 
     render () {
         return (
             <a 
-                href={this.props.item.sensorsUri} 
-                className={this.props.item.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
-                key={this.props.item.code}
+                href={this.props.uri} 
+                className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
+                key={this.props.item.barcode}
                 onClick={(e) => { 
                     e.preventDefault() 
-                    this.itemClicked(this.props.item.code)
+                    this.itemClicked(this.props.item.barcode)
                 }}
                 tabIndex="-1"
                 >
