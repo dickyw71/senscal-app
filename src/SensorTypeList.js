@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import SensorTypeItem from './SensorTypeItem.js';
-import SensorList from './SensorList.js';
+import TypePartsAndSensors from './TypePartsAndSensors.js'
 import './Sidebar.css';
-import PartList from './PartList.js';
 
 class SensorTypeList extends Component {
     constructor(props) {
@@ -68,17 +67,22 @@ class SensorTypeList extends Component {
             typelist = null
         }
         else {
-            typelist = this.state.items.map((item) => {
-                
-                let elements = []
-                elements.push(<SensorTypeItem key={item.code} item={item} onItemClicked={this.handleItemClicked}></SensorTypeItem>)
-                if(item.isOpen) {
-                    // elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
-                    elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
-                }
- 
-                return elements
-            })
+            typelist = this.state.items.map(item => 
+                <>
+                <SensorTypeItem key={item.code} item={item}>
+                </SensorTypeItem>
+                <TypePartsAndSensors 
+                    key={item.code + "_parts_sensors"} 
+                    partsUri={item.partsUri} 
+                    sensorsUri={item.sensorsUri}
+                ></TypePartsAndSensors>
+               </>
+            )
+
+            // if(item.isOpen) {
+            //     // elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
+            //     elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
+            // }           
         }
 
         return (
