@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SensorTypeList from './SensorTypeList';
 import './App.css';
+import './header.css';
 
 
 class App extends Component {
@@ -8,6 +9,15 @@ class App extends Component {
     return (
       <div className="App">
         <header className="_header" role="banner">
+          <button type="button" aria-label="Toggle navigation" className="_header-btn" data-toggle-sidebar="">
+            <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+          </button>
+          <form className="_search" role="search">
+            <svg><use xlink="#icon-search"></use></svg>
+            <input type="search" name="q" className="_search-input" autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck="false" maxLength="30" aria-label="Search" placeholder="Search..." styles={{ paddingLeft: '48px' }}/>
+            <button type="reset" className="_search-clear" title="Clear search"><svg><use xlink="#icon-close"></use></svg>Clear search</button>
+            <div className="_search-tag" styles={{ display: 'none' }}></div>
+          </form>
         </header>
         <section className="_sidebar" tabIndex="-1">
           <SensorTypeList></SensorTypeList>
