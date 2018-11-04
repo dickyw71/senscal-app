@@ -79,7 +79,7 @@ class SensorList extends Component {
         }
         
         return (
-            <div className=" _list _list-sub" role="navigation">
+            <>
                 <a 
                     href={_href} 
                     className={_className} 
@@ -92,7 +92,7 @@ class SensorList extends Component {
                     <span className="_list-text">Sensors</span>             
                 </a>
                 {_sensorList}
-            </div>
+            </>
         );
     }
 }

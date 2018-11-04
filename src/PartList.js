@@ -70,8 +70,8 @@ class PartList extends Component {
                 )
             }
         }
-        return (        
-            <div className="_list _list-sub" role="navigation">
+        return (    
+            <>    
                 <a 
                     href={_href} 
                     className={_className} 
@@ -84,7 +84,7 @@ class PartList extends Component {
                     <span className="_list-text">Parts</span>             
                 </a>
                 {_partlist}
-            </div>
+            </>
         )
     }
 }
