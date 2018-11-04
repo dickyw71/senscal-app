@@ -4,22 +4,30 @@ import './List-Item.css';
 class SensorTypeItem extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isOpen: false
+        }
  
         this.itemClicked = this.itemClicked.bind(this);
     }
 
-    itemClicked(code) {
-        this.props.onItemClicked(code)
+    itemClicked() {
+        this.setState((prevState) => {
+            return {
+               isOpen: prevState.isOpen ? false : true
+            }
+        })
     }
 
     render () {
         return (
             <a 
-                className={this.props.item.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
+                href={'/api/types/' + this.props.item.code}
+                className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
                 key={this.props.item.code}
                 onClick={(e) => { 
                     e.preventDefault() 
-                    this.itemClicked(this.props.item.code)
+                    this.itemClicked()
                 }}
                 tabIndex="-1"
                 >
