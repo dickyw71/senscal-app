@@ -5,6 +5,20 @@ import './header.css';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.updateContent= this.updateContent.bind(this)
+    this.state = {
+      contentUri: ""
+    }
+  }
+
+  updateContent(uri) {
+    this.setState({ 
+      contentUri: uri 
+      })
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,7 +34,7 @@ class App extends Component {
           </form>
         </header>
         <section className="_sidebar" tabIndex="-1">
-          <SensorTypeList></SensorTypeList>
+          <SensorTypeList updateContentUri={this.updateContent}></SensorTypeList>
         </section>
         <div className="_container" role="document">
           <main className="_content _content_loading" role="main"></main>
