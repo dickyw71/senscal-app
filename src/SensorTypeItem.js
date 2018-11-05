@@ -17,6 +17,7 @@ class SensorTypeItem extends Component {
                isOpen: prevState.isOpen ? false : true
             }
         })
+        this.props.updateContentUri('/api/types/' + this.props.item.code)
     }
 
     render () {

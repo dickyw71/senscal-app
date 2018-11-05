@@ -19,6 +19,7 @@ class SensorList extends Component {
                isOpen: prevState.isOpen ? false : true
             }
         })
+        this.props.updateContentUri(this.props.uri)
     }
 
     componentDidMount() {
