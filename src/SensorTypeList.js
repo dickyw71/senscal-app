@@ -11,22 +11,6 @@ class SensorTypeList extends Component {
             isLoaded: false,
             items: []
         }
-
-        this.handleItemClicked = this.handleItemClicked.bind(this)
-    }
-
-    handleItemClicked(code) {
-        let _items = this.state.items.map((item) => {
-            if (item.code === code) {
-                item.isOpen = item.isOpen ? false : true
-            }
-            return item;
-        })
-        this.setState((prevState) => {
-            return {
-                items: _items
-            }
-        })
     }
 
     componentDidMount() {
@@ -42,7 +26,6 @@ class SensorTypeList extends Component {
                                 sensorType: item,
                                 partsUri: `/api/types/${item.sensor_type_cd}/parts/`,
                                 sensorsUri: `/api/types/${item.sensor_type_cd}/sensors/?nh_sens_id=null`,
-                                isOpen: false
                             }
                         }),
                         isLoaded: true
@@ -69,20 +52,19 @@ class SensorTypeList extends Component {
         else {
             typelist = this.state.items.map(item => 
                 <>
-                <SensorTypeItem key={item.code} item={item}>
-                </SensorTypeItem>
-                <TypePartsAndSensors 
-                    key={item.code + "_parts_sensors"} 
-                    partsUri={item.partsUri} 
-                    sensorsUri={item.sensorsUri}
-                ></TypePartsAndSensors>
-               </>
-            )
-
-            // if(item.isOpen) {
-            //     // elements.push(<PartList key={item.partsUri} uri={item.partsUri}></PartList>)
-            //     elements.push(<SensorList key={item.sensorsUri} uri={item.sensorsUri}></SensorList>)
-            // }           
+                    <SensorTypeItem 
+                        key={item.code} 
+                        item={item} 
+                        updateContentUri={this.props.updateContentUri}
+                    ></SensorTypeItem>
+                    <TypePartsAndSensors 
+                        key={item.code + "_parts_sensors"} 
+                        partsUri={item.partsUri} 
+                        sensorsUri={item.sensorsUri}
+                        updateContentUri={this.props.updateContentUri}
+                    ></TypePartsAndSensors>
+                </>
+            )        
         }
 
         return (
