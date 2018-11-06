@@ -12,6 +12,7 @@ class Content extends Component {
         return (
             <div className="_intro">
                 <h1>Sensor Calibration</h1>   
+                <p>{this.props.uri}</p>
             </div>
         )
     }
