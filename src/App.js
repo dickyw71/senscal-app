@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import SensorTypeList from './SensorTypeList';
+import SensorTypeList from './SensorTypeList.js';
+import Content from './Content.js'
 import './App.css';
 import './header.css';
 
@@ -37,7 +38,9 @@ class App extends Component {
           <SensorTypeList updateContentUri={this.updateContent}></SensorTypeList>
         </section>
         <div className="_container" role="document">
-          <main className="_content _content_loading" role="main"></main>
+          <main className="_content _content_loading" role="main">
+            <Content></Content>
+          </main>
         </div>
         <svg styles={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg" >
           <defs>
