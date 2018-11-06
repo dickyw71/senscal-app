@@ -1,0 +1,11 @@
+._container {
+    position: relative;
+    height: 100%;
+    /* margin-left: 40rem; */
+}
+
+._content {
+    position: relative;
+    height: 100%;
+    padding-left: 50rem;
+}
