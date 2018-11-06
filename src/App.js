@@ -39,7 +39,7 @@ class App extends Component {
         </section>
         <div className="_container" role="document">
           <main className="_content _content_loading" role="main">
-            <Content></Content>
+            <Content uri={this.state.contentUri}></Content>
           </main>
         </div>
         <svg styles={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg" >
