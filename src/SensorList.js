@@ -8,7 +8,9 @@ class SensorList extends Component {
             error: null,
             items: [],
             isOpen: false,
-            count: 0
+            count: 0,
+            start: 0,
+            end: 0
         }
         this.itemClicked = this.itemClicked.bind(this)
     }
@@ -38,7 +40,8 @@ class SensorList extends Component {
                             }
                         }),
                         isLoaded: true,
-                        count: result.length
+                        count: result.length,
+                        end: result.length > 100 ? 100 : result.length
                     })
                 },
                 (error) => {
@@ -66,15 +69,12 @@ class SensorList extends Component {
             _href = this.props.uri
         }
 
+        let visibleItems = this.state.items.slice(this.state.start, this.state.end)
 
         if (this.state.isOpen) {
             _sensorList = (
                 <div className="_list _list-sub" role="navigation">
-                    {this.state.items.map((item, index) => { 
-                        if (index < 20 ) {
-                            return <SensorItem key={item.barcode} uri={item.calibrationsUri} item={item}></SensorItem>
-                        }
-                    })}
+                    {visibleItems.map(item => <SensorItem key={item.barcode} uri={item.calibrationsUri} item={item}></SensorItem>)}
                 </div>
             )
         }
