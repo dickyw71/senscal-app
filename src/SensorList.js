@@ -13,6 +13,7 @@ class SensorList extends Component {
             end: 0
         }
         this.itemClicked = this.itemClicked.bind(this)
+        this.showMoreClicked = this.showMoreClicked.bind(this)
     }
 
     itemClicked() {
@@ -22,6 +23,14 @@ class SensorList extends Component {
             }
         })
         this.props.updateContentUri(this.props.uri)
+    }
+
+    showMoreClicked() {
+        this.setState((prevState) => {
+            return {
+                end: (prevState.end+100 > prevState.count) ? prevState.count : prevState.end + 50
+            }
+        })
     }
 
     componentDidMount() {
@@ -41,7 +50,7 @@ class SensorList extends Component {
                         }),
                         isLoaded: true,
                         count: result.length,
-                        end: result.length > 100 ? 100 : result.length
+                        end: result.length > 50 ? 50 : result.length
                     })
                 },
                 (error) => {
@@ -75,6 +84,14 @@ class SensorList extends Component {
             _sensorList = (
                 <div className="_list _list-sub" role="navigation">
                     {visibleItems.map(item => <SensorItem key={item.barcode} uri={item.calibrationsUri} item={item}></SensorItem>)}
+                    {this.state.end === this.state.count ? null :
+                        <span 
+                            className="_list-item _list-pagelink" 
+                            role="link" 
+                            onClick={this.showMoreClicked}
+                        >Show more… ({this.state.count - this.state.end })
+                        </span>
+                    }
                 </div>
             )
         }
@@ -87,7 +104,7 @@ class SensorList extends Component {
                     key={this.props.uri} 
                     onClick={_onClick}
                     tabIndex="-1"
-                    >
+                >
                     {_listArrow}
                     <span className="_list-count">{this.state.count}</span> 
                     <span className="_list-text">Sensors</span>             
