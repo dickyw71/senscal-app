@@ -132,3 +132,12 @@
   margin-left: .375rem;
 }
   
+._list-pagelink {
+  color: #3377c0;
+  cursor: pointer;
+}
+
+._list-pagelink:hover {
+    color: #2f6cb6;
+    text-decoration: underline;
+}
