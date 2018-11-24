@@ -33,8 +33,7 @@ class PartList extends Component {
                         items: result.map((item) => { 
                             return {
                                 part_name: item.sensor_part_name,
-                                part: item,
-                                isOpen: false
+                                part: item
                             }
                         }),
                         count: result.length
