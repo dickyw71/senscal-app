@@ -11,8 +11,13 @@ class SensorItem extends Component {
         this.itemClicked = this.itemClicked.bind(this);
     }
 
-    itemClicked(code) {
-       
+    itemClicked() {
+        this.setState((prevState) => {
+            return {
+               isOpen: prevState.isOpen ? false : true
+            }
+        })
+        this.props.updateContentUri(`/api/sensors/${this.props.item.sensor.SENSOR_ID}`)       
     }
 
     render () {
