@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SensorItem from './SensorItem.js';
+import SensorCalibrations from './SensorCalibrations.js'
 
 class SensorList extends Component {
     constructor(props) {
@@ -83,7 +84,22 @@ class SensorList extends Component {
         if (this.state.isOpen) {
             _sensorList = (
                 <div className="_list _list-sub" role="navigation">
-                    {visibleItems.map(item => <SensorItem key={item.barcode} uri={item.calibrationsUri} item={item}></SensorItem>)}
+                    {visibleItems.map((item) => {
+                       return ( 
+                            <>
+                                <SensorItem 
+                                    key={item.barcode}
+                                    item={item}
+                                    updateContentUri={this.props.updateContentUri}
+                                ></SensorItem>
+                                <SensorCalibrations 
+                                    key={item.barcode + "_calibrations"}
+                                    calibrationsUri={item.calibrationsUri} 
+                                    updateContentUri={this.props.updateContentUri}
+                                ></SensorCalibrations>
+                            </>
+                       )
+                    })}
                     {this.state.end === this.state.count ? null :
                         <span 
                             className="_list-item _list-pagelink" 
