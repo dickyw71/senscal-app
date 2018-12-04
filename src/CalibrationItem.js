@@ -7,6 +7,7 @@ class CalibrationItem extends Component {
     }
 
     render() {
+        let cal_date = new Date(Date.parse(this.props.date)).toDateString()
         return (
             <a
                 className="_list-item _list-dir"
@@ -15,7 +16,7 @@ class CalibrationItem extends Component {
             >
                 <span
                     className="_list-text"
-                >{this.props.item.cert_no}{this.props.item.calibration.most_recent_cal_flag ? " *" : null} ({this.props.date}) [{this.props.cal_by}]</span>
+                >{this.props.item.cert_no}{this.props.item.calibration.most_recent_cal_flag ? " *" : null} ({cal_date || this.props.date}) [{this.props.cal_by}]</span>
             </a>
         )
     }
