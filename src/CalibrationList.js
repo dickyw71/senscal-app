@@ -57,17 +57,19 @@ class CalibrationList extends Component {
         let _href = null
         let _className = "_list-item" 
 
+        const { isOpen, count, items } = this.state
+
         if (this.state.count > 0) {
 
             _listArrow = <svg className="_list-arrow"><use href="#icon-dir"></use></svg>
-            _className = this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"
+            _className = isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"
             _onClick = (e) => { e.preventDefault(); this.itemClicked(this.props.uri) }
             _href = this.props.uri
 
-            if (this.state.isOpen) {
+            if (isOpen) {
                 _callist = (
                     <div className="_list" role="navigation">
-                        {this.state.items.map(item => <CalibrationItem 
+                        {items.map(item => <CalibrationItem 
                                 key={item.cert_no} 
                                 date={item.cal_date}
                                 cal_by={item.calibrator}
@@ -90,7 +92,7 @@ class CalibrationList extends Component {
                     tabIndex="-1"
                     >
                     {_listArrow}
-                    <span className="_list-count">{this.state.count}</span> 
+                    <span className="_list-count">{count}</span> 
                     <span className="_list-text">Calibrations</span>             
                 </a>
                 {_callist}
