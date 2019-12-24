@@ -41,16 +41,18 @@ class SensorTypeList extends Component {
     }
 
     render() {
-        let typelist = undefined;
+        let typelist = undefined
 
-        if (this.state.error) {
-            typelist = <p>Failed to load Sensor Types with error {this.state.error}</p>
+        const { error, items } = this.state
+
+        if (error) {
+            typelist = <p>Failed to load Sensor Types with error {error.toString()}</p>
         }
-        else if (this.state.items.length === 0) {
+        else if (items.length === 0) {
             typelist = null
         }
         else {
-            typelist = this.state.items.map(item => 
+            typelist = items.map(item => 
                 <>
                     <SensorTypeItem 
                         key={item.code} 
