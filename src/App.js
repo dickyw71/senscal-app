@@ -10,8 +10,43 @@ class App extends Component {
     super(props)
     this.updateContent= this.updateContent.bind(this)
     this.state = {
-      contentUri: ""
+      contentUri: "",
+      error: null,
+      sensorStats: {
+        typesCount: 0,
+        sensorsCount: 0,
+        partsCount: 0,
+        calibrationsCount: 0
+      }
     }
+  }
+
+  componentDidMount() {
+    let uris = [
+      '/api/types/?view=count',
+      '/api/sensors/?view=count',
+      '/api/parts/?view=count',
+      '/api/calibrations/?view=count'
+    ]
+
+    Promise.all(uris.map(uri => fetch(uri).then(resp => resp.json())
+    )).then(
+      (result) => { 
+        this.setState({ 
+          sensorStats: { 
+            typesCount: result[0][0].total, 
+              sensorsCount: result[1][0].total, 
+              partsCount: result[2][0].total,
+              calibrationsCount: result[3][0].total  
+          }
+        })
+      },
+      (error) => {
+        this.setState({
+          error: error
+        })
+      }
+    )   
   }
 
   updateContent(uri) {
@@ -39,7 +74,7 @@ class App extends Component {
         </section>
         <div className="_container" role="document">
           <main className="_content _content_loading" role="main">
-            <Content uri={this.state.contentUri}></Content>
+            <Content stats={this.state.sensorStats} uri={this.state.contentUri} error={this.state.error}></Content>
           </main>
         </div>
         <svg styles={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg" >
