@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       contentUri: "",
       error: null,
-      sensorStats: {
+      senscalStats: {
         typesCount: 0,
         sensorsCount: 0,
         partsCount: 0,
@@ -33,7 +33,7 @@ class App extends Component {
     )).then(
       (result) => { 
         this.setState({ 
-          sensorStats: { 
+          senscalStats: { 
             typesCount: result[0][0].total, 
               sensorsCount: result[1][0].total, 
               partsCount: result[2][0].total,
@@ -51,8 +51,8 @@ class App extends Component {
 
   updateContent(uri) {
     this.setState({ 
-      contentUri: uri 
-      })
+      contentUri: uri
+    })   
   }
 
   render() {
@@ -74,7 +74,7 @@ class App extends Component {
         </section>
         <div className="_container" role="document">
           <main className="_content _content_loading" role="main">
-            <Content stats={this.state.sensorStats} uri={this.state.contentUri} error={this.state.error}></Content>
+            <Content stats={this.state.senscalStats} uri={this.state.contentUri} error={this.state.error}></Content>
           </main>
         </div>
         <svg styles={{ display: 'none' }} xmlns="http://www.w3.org/2000/svg" >
