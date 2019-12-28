@@ -20,12 +20,13 @@ class SensorTypeList extends Component {
                 (result) => {
                     this.setState({
                         items: result.map((item) => { 
+                            localStorage.setItem(`/api/types/${item.sensor_type_cd}`, JSON.stringify(item))
                             return {
                                 code: item.sensor_type_cd,
                                 desc: item.sensor_type_sdesc,
                                 sensorType: item,
                                 partsUri: `/api/types/${item.sensor_type_cd}/parts/`,
-                                sensorsUri: `/api/types/${item.sensor_type_cd}/sensors/?nh_sens_id=null`,
+                                sensorsUri: `/api/types/${item.sensor_type_cd}/sensors/?nh_sens_id=null`
                             }
                         }),
                         isLoaded: true
