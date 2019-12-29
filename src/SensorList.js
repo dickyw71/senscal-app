@@ -39,6 +39,7 @@ class SensorList extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    localStorage.setItem(this.props.uri, JSON.stringify(result))
                     this.setState({
                         items: result.map((item) => { 
                             return {
