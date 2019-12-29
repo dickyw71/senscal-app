@@ -28,6 +28,7 @@ class PartList extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    localStorage.setItem(this.props.uri, JSON.stringify(result))
                     this.setState({
                         isLoaded: true,
                         items: result.map((item) => { 
