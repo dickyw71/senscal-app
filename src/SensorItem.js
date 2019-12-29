@@ -21,21 +21,22 @@ class SensorItem extends Component {
     }
 
     render () {
+        const { barcode, part_name } = this.props.item
         return (
             <a 
                 href={this.props.uri} 
                 className={this.state.isOpen ? "_list-item _list-dir open" : "_list-item _list-dir"} 
-                key={this.props.item.barcode}
+                key={barcode}
                 onClick={(e) => { 
                     e.preventDefault() 
-                    this.itemClicked(this.props.item.barcode)
+                    this.itemClicked(barcode)
                 }}
                 tabIndex="-1"
                 >
                 <svg className="_list-arrow">
                     <use href="#icon-dir"></use>
                 </svg>
-                <span className="_list-text">{this.props.item.barcode} - {this.props.item.part_name}</span>
+                <span className="_list-text">{barcode} - {part_name}</span>
             </a>
         )
     }
