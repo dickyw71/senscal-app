@@ -20,6 +20,14 @@ class SensorTypeDetails extends Component {
                             <td>Code</td>
                             <td>{sensor_type_cd}</td>
                         </tr>
+                        <tr>
+                            <td>Parts</td>
+                            <td>{this.props.partsCount}</td>
+                        </tr>  
+                        <tr>
+                            <td>Sensors</td>
+                            <td>{this.props.sensorsCount}</td>
+                        </tr>                                               
                     </tbody>
                 </table>
             </div>
