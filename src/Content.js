@@ -22,9 +22,12 @@ class Content extends Component {
         } else {
             // When content uri is a sensor type show the type details
             if(this.props.uri.match(/\/api\/types\/[A-Z]{2}$/)) {
+                const sensorType = JSON.parse(localStorage.getItem(this.props.uri))
+                const partsCount = JSON.parse(localStorage.getItem(`${this.props.uri}/parts/`)).length
+                const sensorsCount = JSON.parse(localStorage.getItem(`${this.props.uri}/sensors/?nh_sens_id=null`)).length
                 content = (
                     <div className="_sensorType">
-                        <SensorTypeDetails sensorType={JSON.parse(localStorage.getItem(this.props.uri))}></SensorTypeDetails>
+                        <SensorTypeDetails sensorType={sensorType} partsCount={partsCount} sensorsCount={sensorsCount}></SensorTypeDetails>
                     </div>
                 )
             }
