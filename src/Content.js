@@ -39,7 +39,7 @@ class Content extends Component {
                     const parts = JSON.parse(localStorage.getItem(this.props.uri))
                     content = (
                         <>
-                            <h2>{sensorType.sensor_type_sdesc} / Parts</h2>
+                            <h3>{sensorType.sensor_type_sdesc} / Parts</h3>
                             {parts.map((part) => {
                             return (
                                 <p><a>{part.sensor_part_name}</a></p>
@@ -55,7 +55,7 @@ class Content extends Component {
                         const sensors = JSON.parse(localStorage.getItem(this.props.uri))
                         content = (
                             <>
-                                <h2>{sensorType.sensor_type_sdesc} / Sensors</h2>
+                                <h3>{sensorType.sensor_type_sdesc} / Sensors</h3>
                                 {sensors.map((sensor) => {
                                 return (
                                     <p><a>{sensor.BARCODE} - {sensor.SENSOR_PART_NAME}</a></p>
@@ -65,9 +65,10 @@ class Content extends Component {
                         )
                     }
                     else {
-                        if (this.props.uri.match(/\/api\/sensors\/[0123456789]{1,6}$/)) {
+                        if (this.props.uri.match(/\/api\/sensors\/[0123456789]{1,6}\/\?view=full$/)) {
+                            const sensor = JSON.parse(localStorage.getItem(this.props.uri))
                             content = (
-                                <h2>{this.props.uri}</h2>
+                                <h3>{sensor.BARCODE} - {sensor.SENSOR_PART_NAME}</h3>
                             )
                         }
                     }
