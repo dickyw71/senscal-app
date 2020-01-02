@@ -17,7 +17,16 @@ class SensorItem extends Component {
                isOpen: prevState.isOpen ? false : true
             }
         })
-        this.props.updateContentUri(`/api/sensors/${this.props.item.sensor.SENSOR_ID}`)       
+        const sensorUri = `/api/sensors/${this.props.item.sensor.SENSOR_ID}/?view=full`
+        fetch(sensorUri)
+        .then( resp => resp.json())
+        .then(
+            (result) => {
+                localStorage.setItem(sensorUri, JSON.stringify(result))
+                this.props.updateContentUri(sensorUri)
+            },
+            (error) => {}
+        )    
     }
 
     render () {
