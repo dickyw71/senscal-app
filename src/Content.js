@@ -5,12 +5,6 @@ import './Content.css';
 
 
 class Content extends Component {
-    // constructor(props) {
-    //     super(props)
-
-    // }
-
-
 
     render() {
         let content = null

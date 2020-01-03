@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class Intro extends Component {
-    // constructor(props) {
-    //     super(props)
-
-    // }
 
     render() {
         const { typesCount, sensorsCount, partsCount, calibrationsCount} = this.props.stats
