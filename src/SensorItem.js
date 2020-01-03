@@ -38,7 +38,7 @@ class SensorItem extends Component {
                 key={barcode}
                 onClick={(e) => { 
                     e.preventDefault() 
-                    this.itemClicked(barcode)
+                    this.itemClicked()
                 }}
                 tabIndex="-1"
                 >
