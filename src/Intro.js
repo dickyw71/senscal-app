@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 class Intro extends Component {
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-    }
+    // }
 
     render() {
         const { typesCount, sensorsCount, partsCount, calibrationsCount} = this.props.stats
         return (
             <div className="_intro">
-                <h1>Sensor Calibration</h1>
+                <h1>SensCal</h1>
                 <table>
                     <thead>
                         <tr>
