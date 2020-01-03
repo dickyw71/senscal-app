@@ -28,6 +28,7 @@ class CalibrationList extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    localStorage.setItem(this.props.uri, JSON.stringify(result))
                     this.setState({
                         items: result.map((item) => { 
                             return {
@@ -69,7 +70,8 @@ class CalibrationList extends Component {
             if (isOpen) {
                 _callist = (
                     <div className="_list" role="navigation">
-                        {items.map(item => <CalibrationItem 
+                        {items.map(item => 
+                            <CalibrationItem 
                                 key={item.cert_no} 
                                 date={item.cal_date}
                                 cal_by={item.calibrator}
