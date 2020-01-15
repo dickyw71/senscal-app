@@ -22,31 +22,35 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let uris = [
-      '/api/types/?view=count',
-      '/api/sensors/?view=count',
-      '/api/parts/?view=count',
-      '/api/calibrations/?view=count'
+    let promises = [
+      fetch('/api/types/?view=count'),
+      fetch('/api/sensors/?view=count'),
+      fetch('/api/parts/?view=count'),
+      fetch('/api/calibrations/?view=count')
     ]
 
-    Promise.all(uris.map(uri => fetch(uri).then(resp => resp.json())
-    )).then(
-      (result) => { 
-        this.setState({ 
-          senscalStats: { 
-            typesCount: result[0][0].total, 
-              sensorsCount: result[1][0].total, 
-              partsCount: result[2][0].total,
-              calibrationsCount: result[3][0].total  
-          }
-        })
-      },
-      (error) => {
-        this.setState({
-          error: error
-        })
+    Promise.all(promises)
+    .then(async(responses) => {
+      const types = await responses[0].json()
+      const sensors = await responses[1].json()
+      const parts = await responses[2].json()
+      const calibrations = await responses[3].json()
+      return {
+        typesCount: types[0].total,
+        sensorsCount: sensors[0].total,
+        partsCount: parts[0].total,
+        calibrationsCount: calibrations[0].total
       }
-    )   
+    })
+    .then((result) => {
+      this.setState({ 
+          senscalStats: result
+     })
+    }).catch((err) => {
+        this.setState({
+          error: err
+        })
+    });  
   }
 
   updateContent(uri) {
